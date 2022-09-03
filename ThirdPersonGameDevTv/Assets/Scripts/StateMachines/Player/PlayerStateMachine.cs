@@ -4,7 +4,8 @@ namespace StateMachines.Player
 {
     public class PlayerStateMachine : StateMachine
     {
-        [field: SerializeField] public float MovementSpeed { get; private set; } = 3f;
+        [field: SerializeField] public float MovementSpeed { get; private set; } = 6f; // To expose it that way to inspector "set" must not be deleted.
+        [field: SerializeField] public float RotationDamping { get; private set; } = 10f; // To expose it that way to inspector "set" must not be deleted.
 
         public InputReader InputReader { get; private set; }
         public CharacterController CharacterController { get; private set; }
@@ -22,7 +23,7 @@ namespace StateMachines.Player
         private void Start()
         {
             MainCameraTransform = Camera.main.transform;
-            SwitchState(new PlayerTestState(this));
+            SwitchState(new FreeLookState(this));
         }
 
         private void SwitchToJumpState() => SwitchState(new PlayerJumpState(this));
