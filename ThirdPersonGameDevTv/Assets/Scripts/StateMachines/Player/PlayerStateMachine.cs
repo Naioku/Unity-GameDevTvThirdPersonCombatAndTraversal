@@ -1,12 +1,18 @@
+using UnityEngine;
+
 namespace StateMachines.Player
 {
     public class PlayerStateMachine : StateMachine
-    { 
+    {
+        [field: SerializeField] public float MovementSpeed { get; private set; } = 3f;
+
         public InputReader InputReader { get; private set; }
+        public CharacterController CharacterController { get; private set; }
         
         private void Awake()
         {
             InputReader = GetComponent<InputReader>();
+            CharacterController = GetComponent<CharacterController>();
         }
         
         private void Start()

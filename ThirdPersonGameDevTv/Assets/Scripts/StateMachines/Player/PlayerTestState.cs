@@ -21,7 +21,10 @@ namespace StateMachines.Player
                 z = movementInputValue.y
             };
             
-            StateMachine.transform.Translate(movementVector * deltaTime);
+            StateMachine.CharacterController.Move(movementVector * StateMachine.MovementSpeed * deltaTime);
+            
+            if (StateMachine.InputReader.MovementValue == Vector2.zero) return;
+            StateMachine.transform.rotation = Quaternion.LookRotation(movementVector);
         }
 
         public override void Exit()
