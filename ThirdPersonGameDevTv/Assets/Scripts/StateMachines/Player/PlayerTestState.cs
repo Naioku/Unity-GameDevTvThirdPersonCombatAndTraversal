@@ -4,8 +4,6 @@ namespace StateMachines.Player
 {
     public class PlayerTestState : PlayerBaseState
     {
-        private float _timer = 5f;
-        
         public PlayerTestState(PlayerStateMachine stateMachine) : base(stateMachine) {}
 
         public override void Enter()
@@ -15,14 +13,15 @@ namespace StateMachines.Player
 
         public override void Tick(float deltaTime)
         {
-            _timer -= deltaTime;
-            
-            Debug.Log($"Time left to next state change: {_timer}");
-
-            if (_timer <= 0f)
+            Vector2 movementInputValue = StateMachine.InputReader.MovementValue;
+            var movementVector = new Vector3()
             {
-                StateMachine.SwitchState(new PlayerTestState(StateMachine));
-            }
+                x = movementInputValue.x,
+                y = 0,
+                z = movementInputValue.y
+            };
+            
+            StateMachine.transform.Translate(movementVector * deltaTime);
         }
 
         public override void Exit()

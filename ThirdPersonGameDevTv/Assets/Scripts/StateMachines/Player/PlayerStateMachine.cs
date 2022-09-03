@@ -1,12 +1,12 @@
 namespace StateMachines.Player
 {
     public class PlayerStateMachine : StateMachine
-    {
-        private InputReader _inputReader;
+    { 
+        public InputReader InputReader { get; private set; }
         
         private void Awake()
         {
-            _inputReader = GetComponent<InputReader>();
+            InputReader = GetComponent<InputReader>();
         }
         
         private void Start()
@@ -19,14 +19,14 @@ namespace StateMachines.Player
 
         private void OnEnable()
         {
-            _inputReader.JumpEvent += SwitchToJumpState;
-            _inputReader.DodgeEvent += SwitchToDodgeState;
+            InputReader.JumpEvent += SwitchToJumpState;
+            InputReader.DodgeEvent += SwitchToDodgeState;
         }
 
         private void OnDisable()
         {
-            _inputReader.JumpEvent -= SwitchToJumpState;
-            _inputReader.DodgeEvent -= SwitchToDodgeState;
+            InputReader.JumpEvent -= SwitchToJumpState;
+            InputReader.DodgeEvent -= SwitchToDodgeState;
         }
     }
 }
