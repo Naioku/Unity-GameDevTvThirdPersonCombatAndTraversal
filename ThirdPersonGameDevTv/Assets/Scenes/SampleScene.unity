@@ -195,7 +195,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 406151849}
-  m_LocalRotation: {x: -0.10550576, y: 0.000000008551807, z: 9.0732893e-10, w: 0.9944187}
+  m_LocalRotation: {x: -0.10550576, y: 0.000000008555174, z: 9.0768615e-10, w: 0.9944187}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -870,7 +870,7 @@ MonoBehaviour:
   m_YAxis:
     Value: 0.5
     m_SpeedMode: 0
-    m_MaxSpeed: 2
+    m_MaxSpeed: 1.75
     m_AccelTime: 0.2
     m_DecelTime: 0.1
     m_InputAxisName: 
@@ -894,7 +894,7 @@ MonoBehaviour:
   m_XAxis:
     Value: 0
     m_SpeedMode: 0
-    m_MaxSpeed: 200
+    m_MaxSpeed: 250
     m_AccelTime: 0.1
     m_DecelTime: 0.1
     m_InputAxisName: 
@@ -987,7 +987,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1513910386}
-  m_LocalRotation: {x: -0.12352858, y: -0.000000008557473, z: -0.0000000010652513, w: 0.99234104}
+  m_LocalRotation: {x: -0.123528585, y: -0.0000000170746, z: -0.0000000021254798, w: 0.99234104}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -1152,7 +1152,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1687258581}
-  m_LocalRotation: {x: -0.10550576, y: 0.000000034219852, z: 0.000000003630655, w: 0.9944187}
+  m_LocalRotation: {x: -0.10550576, y: 0.00000003422069, z: 0.0000000036307444, w: 0.9944187}
   m_LocalPosition: {x: 0, y: 0.5, z: -6}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -1251,7 +1251,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1853497255}
-  m_LocalRotation: {x: -0.087400325, y: -5.762339e-32, z: 4.827432e-33, w: 0.99617326}
+  m_LocalRotation: {x: -0.087400325, y: 1e-45, z: -0, w: 0.99617326}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0

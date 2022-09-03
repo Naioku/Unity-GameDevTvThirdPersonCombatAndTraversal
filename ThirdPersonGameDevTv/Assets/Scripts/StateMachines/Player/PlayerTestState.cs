@@ -14,14 +14,8 @@ namespace StateMachines.Player
 
         public override void Tick(float deltaTime)
         {
-            Vector2 movementInputValue = StateMachine.InputReader.MovementValue;
-            var movementVector = new Vector3()
-            {
-                x = movementInputValue.x,
-                y = 0,
-                z = movementInputValue.y
-            };
-            
+            var movementVector = CalculateMovementVectorFromCameraPosition();
+
             StateMachine.CharacterController.Move(movementVector * StateMachine.MovementSpeed * deltaTime);
 
             if (StateMachine.InputReader.MovementValue == Vector2.zero)
@@ -37,6 +31,24 @@ namespace StateMachines.Player
         public override void Exit()
         {
             Debug.Log("Exit");
+        }
+        
+        private Vector3 CalculateMovementVectorFromCameraPosition()
+        {
+            // Coordinates of the vector pointing the forward direction from the camera in the world space coordinate system.
+            Vector3 forwardVector = StateMachine.MainCameraTransform.forward;
+            
+            // Coordinates of the vector pointing the right direction from the camera in the world space coordinate system.
+            Vector3 rightVector = StateMachine.MainCameraTransform.right;
+
+            forwardVector.y = 0f;
+            rightVector.y = 0f;
+            
+            forwardVector.Normalize();
+            rightVector.Normalize();
+
+            return forwardVector * StateMachine.InputReader.MovementValue.y +
+                   rightVector * StateMachine.InputReader.MovementValue.x;
         }
     }
 }

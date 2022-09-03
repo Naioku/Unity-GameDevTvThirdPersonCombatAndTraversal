@@ -9,6 +9,8 @@ namespace StateMachines.Player
         public InputReader InputReader { get; private set; }
         public CharacterController CharacterController { get; private set; }
         public Animator Animator { get; private set; }
+        public Transform MainCameraTransform { get; private set; }
+
         
         private void Awake()
         {
@@ -19,6 +21,7 @@ namespace StateMachines.Player
         
         private void Start()
         {
+            MainCameraTransform = Camera.main.transform;
             SwitchState(new PlayerTestState(this));
         }
 
