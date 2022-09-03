@@ -4,6 +4,7 @@ namespace StateMachines.Player
 {
     public class PlayerTestState : PlayerBaseState
     {
+        private static readonly int MovementSpeed = Animator.StringToHash("MovementSpeed");
         public PlayerTestState(PlayerStateMachine stateMachine) : base(stateMachine) {}
 
         public override void Enter()
@@ -22,9 +23,15 @@ namespace StateMachines.Player
             };
             
             StateMachine.CharacterController.Move(movementVector * StateMachine.MovementSpeed * deltaTime);
+
+            if (StateMachine.InputReader.MovementValue == Vector2.zero)
+            {
+                StateMachine.Animator.SetFloat(MovementSpeed, 0f, 0.05f, deltaTime);
+                return;
+            }
             
-            if (StateMachine.InputReader.MovementValue == Vector2.zero) return;
             StateMachine.transform.rotation = Quaternion.LookRotation(movementVector);
+            StateMachine.Animator.SetFloat(MovementSpeed, 1f, 0.05f, deltaTime);
         }
 
         public override void Exit()

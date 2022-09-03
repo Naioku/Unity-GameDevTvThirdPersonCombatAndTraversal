@@ -8,11 +8,13 @@ namespace StateMachines.Player
 
         public InputReader InputReader { get; private set; }
         public CharacterController CharacterController { get; private set; }
+        public Animator Animator { get; private set; }
         
         private void Awake()
         {
             InputReader = GetComponent<InputReader>();
             CharacterController = GetComponent<CharacterController>();
+            Animator = GetComponent<Animator>();
         }
         
         private void Start()
