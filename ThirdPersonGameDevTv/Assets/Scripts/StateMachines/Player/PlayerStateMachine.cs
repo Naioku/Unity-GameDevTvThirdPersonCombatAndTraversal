@@ -1,17 +1,29 @@
+using UnityEngine;
+
 namespace StateMachines.Player
 {
     public class PlayerStateMachine : StateMachine
     {
-        private InputReader _inputReader;
+        [field: SerializeField] public float MovementSpeed { get; private set; } = 6f; // To expose it that way to inspector "set" must not be deleted.
+        [field: SerializeField] public float RotationDamping { get; private set; } = 10f; // To expose it that way to inspector "set" must not be deleted.
+
+        public InputReader InputReader { get; private set; }
+        public CharacterController CharacterController { get; private set; }
+        public Animator Animator { get; private set; }
+        public Transform MainCameraTransform { get; private set; }
+
         
         private void Awake()
         {
-            _inputReader = GetComponent<InputReader>();
+            InputReader = GetComponent<InputReader>();
+            CharacterController = GetComponent<CharacterController>();
+            Animator = GetComponent<Animator>();
         }
         
         private void Start()
         {
-            SwitchState(new PlayerTestState(this));
+            MainCameraTransform = Camera.main.transform;
+            SwitchState(new FreeLookState(this));
         }
 
         private void SwitchToJumpState() => SwitchState(new PlayerJumpState(this));
@@ -19,14 +31,14 @@ namespace StateMachines.Player
 
         private void OnEnable()
         {
-            _inputReader.JumpEvent += SwitchToJumpState;
-            _inputReader.DodgeEvent += SwitchToDodgeState;
+            InputReader.JumpEvent += SwitchToJumpState;
+            InputReader.DodgeEvent += SwitchToDodgeState;
         }
 
         private void OnDisable()
         {
-            _inputReader.JumpEvent -= SwitchToJumpState;
-            _inputReader.DodgeEvent -= SwitchToDodgeState;
+            InputReader.JumpEvent -= SwitchToJumpState;
+            InputReader.DodgeEvent -= SwitchToDodgeState;
         }
     }
 }
