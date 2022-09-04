@@ -20,7 +20,7 @@ namespace StateMachines.Player
         {
             var movementVector = CalculateMovementVectorFromCameraPosition();
 
-            StateMachine.CharacterController.Move(movementVector * StateMachine.MovementSpeed * deltaTime);
+            Move(movementVector * StateMachine.MovementSpeed, deltaTime);
 
             if (StateMachine.InputReader.MovementValue == Vector2.zero)
             {

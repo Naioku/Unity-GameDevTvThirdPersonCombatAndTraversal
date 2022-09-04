@@ -13,12 +13,14 @@ namespace StateMachines.Player
         public CharacterController CharacterController { get; private set; }
         public Animator Animator { get; private set; }
         public Transform MainCameraTransform { get; private set; }
+        public GravityReceiver GravityReceiver { get; private set; }
         
         private void Awake()
         {
             InputReader = GetComponent<InputReader>();
             CharacterController = GetComponent<CharacterController>();
             Animator = GetComponent<Animator>();
+            GravityReceiver = GetComponent<GravityReceiver>();
         }
         
         private void Start()

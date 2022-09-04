@@ -40,8 +40,11 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 3864492483817298303}
+  - component: {fileID: 7296312723748105215}
+  - component: {fileID: 1400034868111725078}
   - component: {fileID: 1705985189052081660}
   - component: {fileID: 4122256252888375124}
+  - component: {fileID: 958513175425824193}
   m_Layer: 0
   m_Name: Player
   m_TagString: Player
@@ -67,6 +70,44 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: -1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!95 &7296312723748105215
+Animator:
+  serializedVersion: 4
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3481165242546750795}
+  m_Enabled: 1
+  m_Avatar: {fileID: 9000000, guid: e4db3a1ea53daa8419be250cd7b5f69f, type: 3}
+  m_Controller: {fileID: 9100000, guid: cdd196152bac24d4e824706e5786583f, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorControllerStateOnDisable: 0
+--- !u!143 &1400034868111725078
+CharacterController:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3481165242546750795}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Height: 2
+  m_Radius: 0.3
+  m_SlopeLimit: 45
+  m_StepOffset: 0.3
+  m_SkinWidth: 0.03
+  m_MinMoveDistance: 0
+  m_Center: {x: 0, y: 1, z: 0}
 --- !u!114 &1705985189052081660
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -92,6 +133,18 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: c87a2dc953940a64f95aa5854f4907d8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &958513175425824193
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3481165242546750795}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3b3a0fe1bc5566c409c22b551cc59387, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
 --- !u!1 &7135337961331737046
@@ -169,6 +222,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7ace632260712014f9c69990ec2da2ce, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  cinemachineTargetGroup: {fileID: 0}
 --- !u!1001 &8556948568098171500
 PrefabInstance:
   m_ObjectHideFlags: 0
