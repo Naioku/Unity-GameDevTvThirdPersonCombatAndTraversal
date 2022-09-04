@@ -4,14 +4,16 @@ namespace StateMachines.Player
 {
     public class FreeLookState : PlayerBaseState
     {
-        private static readonly int MovementSpeed = Animator.StringToHash("MovementSpeed");
+        private static readonly int MovementSpeedHash = Animator.StringToHash("MovementSpeed");
+        private static readonly int FreeLookLocomotionHash = Animator.StringToHash("FreeLookLocomotion");
         private const float AnimatorDampTime = 0.05f;
         
         public FreeLookState(PlayerStateMachine stateMachine) : base(stateMachine) {}
 
         public override void Enter()
         {
-            Debug.Log("Enter");
+            StateMachine.Animator.Play(FreeLookLocomotionHash);
+            StateMachine.InputReader.TargetEvent += OnTarget;
         }
 
         public override void Tick(float deltaTime)
@@ -22,17 +24,17 @@ namespace StateMachines.Player
 
             if (StateMachine.InputReader.MovementValue == Vector2.zero)
             {
-                StateMachine.Animator.SetFloat(MovementSpeed, 0f, AnimatorDampTime, deltaTime);
+                StateMachine.Animator.SetFloat(MovementSpeedHash, 0f, AnimatorDampTime, deltaTime);
                 return;
             }
             
             FaceMovementDirection(movementVector);
-            StateMachine.Animator.SetFloat(MovementSpeed, 1f, AnimatorDampTime, deltaTime);
+            StateMachine.Animator.SetFloat(MovementSpeedHash, 1f, AnimatorDampTime, deltaTime);
         }
 
         public override void Exit()
         {
-            Debug.Log("Exit");
+            StateMachine.InputReader.TargetEvent -= OnTarget;
         }
         
         private Vector3 CalculateMovementVectorFromCameraPosition()
@@ -59,6 +61,13 @@ namespace StateMachines.Player
                 StateMachine.transform.rotation,
                 Quaternion.LookRotation(movementVector),
                 Time.deltaTime * StateMachine.RotationDamping);
+        }
+        
+        private void OnTarget()
+        {
+            if (!StateMachine.Targeter.SelectTarget()) return;
+            
+            StateMachine.SwitchState(new TargetingState(StateMachine));
         }
     }
 }

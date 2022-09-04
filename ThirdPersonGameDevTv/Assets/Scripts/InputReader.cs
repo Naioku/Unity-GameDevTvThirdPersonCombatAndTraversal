@@ -6,6 +6,8 @@ public class InputReader : MonoBehaviour, Controls.IPlayerActions
 {
     public event Action JumpEvent;
     public event Action DodgeEvent;
+    public event Action TargetEvent;
+    public event Action CancelEvent;
     
     public Vector2 MovementValue { get; private set; }
     
@@ -37,11 +39,25 @@ public class InputReader : MonoBehaviour, Controls.IPlayerActions
         
         DodgeEvent?.Invoke();
     }
-    
+
+    public void OnTarget(InputAction.CallbackContext context)
+    {
+        if (!context.performed) return;
+        
+        TargetEvent?.Invoke();
+    }
+
+    public void OnCancel(InputAction.CallbackContext context)
+    {
+        if (!context.performed) return;
+        
+        CancelEvent?.Invoke();
+    }
+
     public void OnMove(InputAction.CallbackContext context)
     {
         MovementValue = context.ReadValue<Vector2>();
     }
-    
+
     public void OnCameraLook(InputAction.CallbackContext context) {}
 }
