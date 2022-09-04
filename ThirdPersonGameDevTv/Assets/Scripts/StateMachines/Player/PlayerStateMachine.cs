@@ -5,7 +5,8 @@ namespace StateMachines.Player
 {
     public class PlayerStateMachine : StateMachine
     {
-        [field: SerializeField] public float MovementSpeed { get; private set; } = 6f; // To expose it that way to inspector "set" must not be deleted.
+        [field: SerializeField] public float FreeLookMovementSpeed { get; private set; } = 6f; // To expose it that way to inspector "set" must not be deleted.
+        [field: SerializeField] public float TargetingMovementSpeed { get; private set; } = 5f; // To expose it that way to inspector "set" must not be deleted.
         [field: SerializeField] public float RotationDamping { get; private set; } = 10f; // To expose it that way to inspector "set" must not be deleted.
         [field: SerializeField] public Targeter Targeter { get; private set; }
 

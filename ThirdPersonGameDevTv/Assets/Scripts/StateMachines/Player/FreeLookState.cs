@@ -4,7 +4,7 @@ namespace StateMachines.Player
 {
     public class FreeLookState : PlayerBaseState
     {
-        private static readonly int MovementSpeedHash = Animator.StringToHash("MovementSpeed");
+        private static readonly int MovementSpeedHash = Animator.StringToHash("FreeLookMovementSpeed");
         private static readonly int FreeLookLocomotionHash = Animator.StringToHash("FreeLookLocomotion");
         private const float AnimatorDampTime = 0.05f;
         
@@ -20,7 +20,7 @@ namespace StateMachines.Player
         {
             var movementVector = CalculateMovementVectorFromCameraPosition();
 
-            Move(movementVector * StateMachine.MovementSpeed, deltaTime);
+            Move(movementVector * StateMachine.FreeLookMovementSpeed, deltaTime);
 
             if (StateMachine.InputReader.MovementValue == Vector2.zero)
             {

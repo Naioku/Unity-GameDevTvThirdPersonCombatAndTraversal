@@ -1,3 +1,4 @@
+using Combat.Targeting;
 using UnityEngine;
 
 namespace StateMachines.Player
@@ -14,6 +15,20 @@ namespace StateMachines.Player
         protected void Move(Vector3 motion, float deltaTime)
         {
             StateMachine.CharacterController.Move((motion + StateMachine.GravityReceiver.GravityVector) * deltaTime);
+        }
+
+        protected void FaceTarget()
+        {
+
+            Target target = StateMachine.Targeter.CurrentTarget;
+            if (target == null) return;
+
+            Vector3 pointingVector = target.transform.position - StateMachine.transform.position;
+            pointingVector.y = 0f;
+
+            StateMachine.transform.rotation = Quaternion.LookRotation(pointingVector);
+            
+            // StateMachine.transform.LookAt(target.transform.position);
         }
     }
 }
