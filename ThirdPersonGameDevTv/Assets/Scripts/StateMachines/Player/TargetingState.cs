@@ -15,6 +15,8 @@ namespace StateMachines.Player
         {
             StateMachine.Animator.Play(TargetingLocomotion);
             StateMachine.InputReader.CancelEvent += OnCancel;
+            StateMachine.InputReader.AttackEvent += OnAttack;
+
         }
 
         public override void Tick(float deltaTime)
@@ -32,6 +34,7 @@ namespace StateMachines.Player
         public override void Exit()
         {
             StateMachine.InputReader.CancelEvent -= OnCancel;
+            StateMachine.InputReader.AttackEvent -= OnAttack;
         }
 
         private void OnCancel()
@@ -53,7 +56,7 @@ namespace StateMachines.Player
         private void UpdateAnimator(float deltaTime)
         {
             float movementRightValue = StateMachine.InputReader.MovementValue.x;
-            float movementForwardValue = StateMachine.InputReader.MovementValue.y; ;
+            float movementForwardValue = StateMachine.InputReader.MovementValue.y;
 
             if (movementForwardValue == 0f)
             {
@@ -74,6 +77,11 @@ namespace StateMachines.Player
                 float value = movementRightValue > 0f ? 1f : -1f;
                 StateMachine.Animator.SetFloat(TargetingMovementRightSpeedHash, value, AnimatorDampTime, deltaTime);
             }
+        }
+        
+        private void OnAttack()
+        {
+            StateMachine.SwitchState(new AttackingState(StateMachine));
         }
     }
 }

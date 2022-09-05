@@ -1,4 +1,3 @@
-using System;
 using System.Collections.Generic;
 using Cinemachine;
 using UnityEngine;
@@ -11,7 +10,7 @@ namespace Combat.Targeting
 
         [SerializeField] private CinemachineTargetGroup cinemachineTargetGroup;
 
-        private readonly List<Target> _targetList = new();
+        public List<Target> _targetList = new();
 
         private Camera _mainCamera;
 
