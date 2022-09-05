@@ -120,9 +120,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 79806939a4068334f9d938f2fd31921f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  <MovementSpeed>k__BackingField: 6
+  <FreeLookMovementSpeed>k__BackingField: 6
+  <TargetingMovementSpeed>k__BackingField: 5
   <RotationDamping>k__BackingField: 10
   <Targeter>k__BackingField: {fileID: 1202950029492682448}
+  <Attacks>k__BackingField:
+  - <AnimationName>k__BackingField: Attack1
+  - <AnimationName>k__BackingField: Attack2
+  - <AnimationName>k__BackingField: Attack3
 --- !u!114 &4122256252888375124
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -223,6 +228,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   cinemachineTargetGroup: {fileID: 0}
+  _targetList: []
 --- !u!1001 &8556948568098171500
 PrefabInstance:
   m_ObjectHideFlags: 0

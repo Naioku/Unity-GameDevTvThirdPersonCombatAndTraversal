@@ -81,7 +81,7 @@ namespace StateMachines.Player
         
         private void OnAttack()
         {
-            StateMachine.SwitchState(new AttackingState(StateMachine));
+            StateMachine.SwitchState(new AttackingState(StateMachine, 0));
         }
     }
 }

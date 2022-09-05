@@ -1,3 +1,4 @@
+using Combat;
 using UnityEngine;
 
 namespace StateMachines.Player
@@ -5,15 +6,22 @@ namespace StateMachines.Player
     public class AttackingState : PlayerBaseState
     {
         private float _timer = 2f;
-        public AttackingState(PlayerStateMachine stateMachine) : base(stateMachine) {}
+        private readonly Attack _attack;
+
+        public AttackingState(PlayerStateMachine stateMachine, int attackId) : base(stateMachine)
+        {
+            _attack = StateMachine.Attacks[attackId];
+        }
 
         public override void Enter()
         {
-            Debug.Log("Entering the: AttackingState");
+            StateMachine.Animator.CrossFadeInFixedTime(_attack.AnimationName, 0.1f);
         }
 
         public override void Tick(float deltaTime)
         {
+            Debug.Log(_attack.AnimationName);
+            
             _timer -= deltaTime;
             if (_timer <= 0f) StateMachine.SwitchState(new FreeLookState(StateMachine));
         }
