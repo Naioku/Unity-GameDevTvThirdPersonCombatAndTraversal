@@ -15,7 +15,7 @@ namespace StateMachines.Player
         {
             StateMachine.Animator.Play(TargetingLocomotion);
             StateMachine.InputReader.CancelEvent += OnCancel;
-            StateMachine.InputReader.AttackEvent += OnAttack;
+            // StateMachine.InputReader.AttackEvent += OnAttack;
 
         }
 
@@ -24,6 +24,11 @@ namespace StateMachines.Player
             if (StateMachine.Targeter.CurrentTarget == null)
             {
                 StateMachine.SwitchState(new FreeLookState(StateMachine));
+            }
+
+            if (StateMachine.InputReader.IsAttacking)
+            {
+                OnAttack();
             }
             
             Move(CalculateMovement() * StateMachine.TargetingMovementSpeed, deltaTime);
@@ -34,7 +39,7 @@ namespace StateMachines.Player
         public override void Exit()
         {
             StateMachine.InputReader.CancelEvent -= OnCancel;
-            StateMachine.InputReader.AttackEvent -= OnAttack;
+            // StateMachine.InputReader.AttackEvent -= OnAttack;
         }
 
         private void OnCancel()
