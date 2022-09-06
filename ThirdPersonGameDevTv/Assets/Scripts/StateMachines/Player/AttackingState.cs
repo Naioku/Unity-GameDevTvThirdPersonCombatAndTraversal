@@ -6,7 +6,8 @@ namespace StateMachines.Player
     public class AttackingState : PlayerBaseState
     {
         private float _previousFrameTime;
-        private float _timer = 2f; 
+        private bool _isComboBroken;
+
         private readonly Attack _attack;
 
         public AttackingState(PlayerStateMachine stateMachine, int attackIndex) : base(stateMachine)
@@ -17,37 +18,23 @@ namespace StateMachines.Player
         public override void Enter()
         {
             StateMachine.Animator.CrossFadeInFixedTime(_attack.AnimationName, _attack.TransitionDuration);
+            StateMachine.InputReader.AttackEvent += TryComboAttack;
         }
 
         public override void Tick(float deltaTime)
         {
             Move(deltaTime);
             FaceTarget();
-            
-            float normalizedTime = GetNormalizedTime();
 
-            if (_previousFrameTime <= normalizedTime && normalizedTime < 1f)
-            {
-                if (StateMachine.InputReader.IsAttacking)
-                {
-                    TryComboAttack(normalizedTime);
-                }
-            }
-            else
+            if (GetNormalizedAnimationTime() >= 1f)
             {
                 StateMachine.SwitchState(new FreeLookState(StateMachine));
             }
-            
-            _previousFrameTime = normalizedTime;
-            
-            // Debug.Log(_attack.AnimationName);
-            
-            // _timer -= deltaTime;
-            // if (_timer <= 0f) StateMachine.SwitchState(new FreeLookState(StateMachine));
         }
 
         public override void Exit()
         {
+            StateMachine.InputReader.AttackEvent -= TryComboAttack;
             Debug.Log("Exiting the: AttackingState");
         }
         
@@ -63,7 +50,7 @@ namespace StateMachines.Player
         /// It gets the normalized time of currently played animation tagged with "Attack".
         /// </summary>
         /// <returns></returns>
-        private float GetNormalizedTime()
+        private float GetNormalizedAnimationTime()
         {
             AnimatorStateInfo currentInfo = StateMachine.Animator.GetCurrentAnimatorStateInfo(0);
             AnimatorStateInfo nextInfo = StateMachine.Animator.GetNextAnimatorStateInfo(0);
@@ -81,10 +68,23 @@ namespace StateMachines.Player
             return 0f;
         }
         
-        private void TryComboAttack(float normalizedTime)
+        private void TryComboAttack()
         {
+            if (GetNormalizedAnimationTime() < _previousFrameTime)
+            {
+                _previousFrameTime = GetNormalizedAnimationTime();
+                return;
+            }
+            _previousFrameTime = GetNormalizedAnimationTime();
+
             if (!HasCombo()) return;
-            if (!ReadyForNextAttack(normalizedTime)) return;
+            if (!ReadyForNextAttack(GetNormalizedAnimationTime()))
+            {
+                _isComboBroken = true;
+                return;
+            }
+            
+            if (_isComboBroken) return;
             
             StateMachine.SwitchState
             (

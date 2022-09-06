@@ -14,16 +14,11 @@ namespace StateMachines.Player
         {
             StateMachine.Animator.Play(FreeLookLocomotionHash);
             StateMachine.InputReader.TargetEvent += OnTarget;
-            // StateMachine.InputReader.AttackEvent += OnAttack;
+            StateMachine.InputReader.AttackEvent += OnAttack;
         }
 
         public override void Tick(float deltaTime)
         {
-            if (StateMachine.InputReader.IsAttacking)
-            {
-                OnAttack();
-            }
-            
             var movementVector = CalculateMovementVectorFromCameraPosition();
 
             Move(movementVector * StateMachine.FreeLookMovementSpeed, deltaTime);
@@ -41,7 +36,7 @@ namespace StateMachines.Player
         public override void Exit()
         {
             StateMachine.InputReader.TargetEvent -= OnTarget;
-            // StateMachine.InputReader.AttackEvent -= OnAttack;
+            StateMachine.InputReader.AttackEvent -= OnAttack;
         }
         
         private Vector3 CalculateMovementVectorFromCameraPosition()
