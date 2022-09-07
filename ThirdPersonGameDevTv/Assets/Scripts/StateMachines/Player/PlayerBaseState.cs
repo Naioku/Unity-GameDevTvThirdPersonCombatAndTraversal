@@ -14,7 +14,7 @@ namespace StateMachines.Player
 
         protected void Move(Vector3 motion, float deltaTime)
         {
-            StateMachine.CharacterController.Move((motion + StateMachine.GravityReceiver.GravityVector) * deltaTime);
+            StateMachine.CharacterController.Move((motion + StateMachine.ForceReceiver.ForceDisplacement) * deltaTime);
         }
 
         protected void FaceTarget()

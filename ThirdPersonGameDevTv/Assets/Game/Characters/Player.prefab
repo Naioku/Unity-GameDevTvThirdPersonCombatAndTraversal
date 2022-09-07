@@ -128,15 +128,21 @@ MonoBehaviour:
   - <AnimationName>k__BackingField: Attack1
     <TransitionDuration>k__BackingField: 0.1
     <NextAttackIndex>k__BackingField: 1
-    <ComboAttackTime>k__BackingField: 0.5
+    <NextComboAttackTime>k__BackingField: 0.5
+    <ForceValue>k__BackingField: 15
+    <ForceTime>k__BackingField: 0.1
   - <AnimationName>k__BackingField: Attack2
     <TransitionDuration>k__BackingField: 0.1
     <NextAttackIndex>k__BackingField: 2
-    <ComboAttackTime>k__BackingField: 0.5
+    <NextComboAttackTime>k__BackingField: 0.5
+    <ForceValue>k__BackingField: 15
+    <ForceTime>k__BackingField: 0.35
   - <AnimationName>k__BackingField: Attack3
     <TransitionDuration>k__BackingField: 0.2
     <NextAttackIndex>k__BackingField: -1
-    <ComboAttackTime>k__BackingField: 0
+    <NextComboAttackTime>k__BackingField: 0
+    <ForceValue>k__BackingField: 20
+    <ForceTime>k__BackingField: 0.35
 --- !u!114 &4122256252888375124
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -161,6 +167,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3b3a0fe1bc5566c409c22b551cc59387, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  impactSmoothingTime: 0.1
 --- !u!1 &7135337961331737046
 GameObject:
   m_ObjectHideFlags: 0

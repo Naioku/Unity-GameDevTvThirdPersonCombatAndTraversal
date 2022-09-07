@@ -9,6 +9,7 @@ namespace StateMachines.Player
         private bool _isComboBroken;
 
         private readonly Attack _attack;
+        private bool _hasForceAlreadyApplied;
 
         public AttackingState(PlayerStateMachine stateMachine, int attackIndex) : base(stateMachine)
         {
@@ -28,19 +29,50 @@ namespace StateMachines.Player
 
             if (GetNormalizedAnimationTime() >= 1f)
             {
-                StateMachine.SwitchState(new FreeLookState(StateMachine));
+                if (StateMachine.Targeter.CurrentTarget == null)
+                {
+                    StateMachine.SwitchState(new FreeLookState(StateMachine));
+                }
+                else
+                {
+                    StateMachine.SwitchState(new TargetingState(StateMachine));
+                }
+            }
+            
+            if (GetNormalizedAnimationTime() >= _attack.ForceTime)
+            {
+                TryForceApplication();
             }
         }
 
         public override void Exit()
         {
             StateMachine.InputReader.AttackEvent -= TryComboAttack;
-            Debug.Log("Exiting the: AttackingState");
         }
         
         private void Move(float deltaTime)
         {
             Move(Vector3.zero, deltaTime);
+        }
+
+        private void TryComboAttack()
+        {
+            if (!HasCombo()) return;
+            if (!ReadyForNextAttack(GetNormalizedAnimationTime()))
+            {
+                _isComboBroken = true;
+                return;
+            }
+            if (_isComboBroken) return;
+
+            StateMachine.SwitchState
+            (
+                new AttackingState
+                (
+                    StateMachine,
+                    _attack.NextAttackIndex
+                )
+            );
         }
 
         /// <summary>
@@ -67,43 +99,24 @@ namespace StateMachines.Player
 
             return 0f;
         }
-        
-        private void TryComboAttack()
-        {
-            if (GetNormalizedAnimationTime() < _previousFrameTime)
-            {
-                _previousFrameTime = GetNormalizedAnimationTime();
-                return;
-            }
-            _previousFrameTime = GetNormalizedAnimationTime();
-
-            if (!HasCombo()) return;
-            if (!ReadyForNextAttack(GetNormalizedAnimationTime()))
-            {
-                _isComboBroken = true;
-                return;
-            }
-            
-            if (_isComboBroken) return;
-            
-            StateMachine.SwitchState
-            (
-                new AttackingState
-                (
-                    StateMachine,
-                    _attack.NextAttackIndex
-                )
-            );
-        }
 
         private bool ReadyForNextAttack(float normalizedTime)
         {
-            return normalizedTime > _attack.ComboAttackTime;
+            return normalizedTime > _attack.NextComboAttackTime;
         }
 
         private bool HasCombo()
         {
             return _attack.NextAttackIndex >= 0;
+        }
+
+        private void TryForceApplication()
+        {
+            if (_hasForceAlreadyApplied) return;
+            
+            StateMachine.ForceReceiver.AddForce(StateMachine.transform.forward * _attack.ForceValue);
+            _hasForceAlreadyApplied = true;
+            
         }
     }
 }
