@@ -18,11 +18,10 @@ namespace Combat
         private void OnTriggerEnter(Collider other)
         {
             if (other == ownerCollider) return;
-
+            
             if (_alreadyCollidedWith.Contains(other)) return;
             
             _alreadyCollidedWith.Add(other);
-            
             if (other.TryGetComponent(out Health health))
             {
                 health.TakeDamage(_weaponDamage);

@@ -30,7 +30,7 @@ namespace StateMachines.Player
         private void Start()
         {
             MainCameraTransform = Camera.main.transform;
-            SwitchState(new FreeLookState(this));
+            SwitchState(new PlayerFreeLookState(this));
         }
     }
 }

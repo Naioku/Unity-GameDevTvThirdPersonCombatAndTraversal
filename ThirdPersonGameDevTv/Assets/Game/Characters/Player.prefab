@@ -46,6 +46,7 @@ GameObject:
   - component: {fileID: 4122256252888375124}
   - component: {fileID: 958513175425824193}
   - component: {fileID: 7258289134188462855}
+  - component: {fileID: 2678663919103786033}
   m_Layer: 0
   m_Name: Player
   m_TagString: Player
@@ -186,6 +187,19 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   weaponDamageCollider: {fileID: 3168664949812398278}
+--- !u!114 &2678663919103786033
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3481165242546750795}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 813513cdbe5fd564f9c2b0992a07de79, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  maxHealth: 100
 --- !u!1 &7135337961331737046
 GameObject:
   m_ObjectHideFlags: 0
