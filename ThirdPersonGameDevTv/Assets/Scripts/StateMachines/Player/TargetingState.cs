@@ -7,13 +7,14 @@ namespace StateMachines.Player
         private static readonly int TargetingLocomotion = Animator.StringToHash("TargetingLocomotion");
         private static readonly int TargetingMovementForwardSpeedHash = Animator.StringToHash("TargetingMovementForwardSpeed");
         private static readonly int TargetingMovementRightSpeedHash = Animator.StringToHash("TargetingMovementRightSpeed");
+        private const float AnimationCrossFadeDuration = 0.1f;
         private const float AnimatorDampTime = 0.05f;
 
         public TargetingState(PlayerStateMachine stateMachine) : base(stateMachine) {}
         
         public override void Enter()
         {
-            StateMachine.Animator.Play(TargetingLocomotion);
+            StateMachine.Animator.CrossFadeInFixedTime(TargetingLocomotion, AnimationCrossFadeDuration);
             StateMachine.InputReader.CancelEvent += OnCancel;
             StateMachine.InputReader.AttackEvent += OnAttack;
 

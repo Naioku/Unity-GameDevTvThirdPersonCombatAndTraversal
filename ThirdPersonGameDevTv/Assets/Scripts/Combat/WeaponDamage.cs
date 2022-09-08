@@ -1,4 +1,3 @@
-using System;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -7,8 +6,8 @@ namespace Combat
     public class WeaponDamage : MonoBehaviour
     {
         [SerializeField] private Collider ownerCollider;
-        [SerializeField] private int weaponDamage = 5;
-
+        
+        private int _weaponDamage;
         private readonly List<Collider> _alreadyCollidedWith = new();
 
         private void OnEnable()
@@ -26,8 +25,13 @@ namespace Combat
             
             if (other.TryGetComponent(out Health health))
             {
-                health.TakeDamage(weaponDamage);
+                health.TakeDamage(_weaponDamage);
             }
+        }
+
+        public void SetWeaponDamage(int damage)
+        {
+            _weaponDamage = damage;
         }
     }
 }

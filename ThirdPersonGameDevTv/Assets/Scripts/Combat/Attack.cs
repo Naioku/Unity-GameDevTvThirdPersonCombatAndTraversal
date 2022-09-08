@@ -31,5 +31,7 @@ namespace Combat
         [field: Range(0f, 1f)]
         [field: SerializeField]
         public float ForceTime { get; private set; }
+
+        [field: SerializeField] public int Damage { get; private set; } = 5;
     }
 }

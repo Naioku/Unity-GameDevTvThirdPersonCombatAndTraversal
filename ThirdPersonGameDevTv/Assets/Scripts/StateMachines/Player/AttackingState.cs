@@ -20,6 +20,7 @@ namespace StateMachines.Player
         {
             StateMachine.Animator.CrossFadeInFixedTime(_attack.AnimationName, _attack.TransitionDuration);
             StateMachine.InputReader.AttackEvent += TryComboAttack;
+            StateMachine.WeaponDamage.SetWeaponDamage(_attack.Damage);
         }
 
         public override void Tick(float deltaTime)

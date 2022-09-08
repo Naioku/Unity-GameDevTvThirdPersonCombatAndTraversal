@@ -11,6 +11,7 @@ namespace StateMachines.Player
         [field: SerializeField] public float RotationDamping { get; private set; } = 10f; // To expose it that way to inspector "set" must not be deleted.
         [field: SerializeField] public Targeter Targeter { get; private set; } // To expose it that way to inspector "set" must not be deleted.
         [field: SerializeField] public Attack[] Attacks { get; private set; } // To expose it that way to inspector "set" must not be deleted.
+        [field: SerializeField] public WeaponDamage WeaponDamage { get; private set; } // To expose it that way to inspector "set" must not be deleted.
 
         public InputReader InputReader { get; private set; }
         public CharacterController CharacterController { get; private set; }

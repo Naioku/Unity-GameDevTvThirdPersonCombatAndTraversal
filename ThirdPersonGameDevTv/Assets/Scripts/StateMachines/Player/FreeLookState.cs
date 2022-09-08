@@ -6,13 +6,14 @@ namespace StateMachines.Player
     {
         private static readonly int MovementSpeedHash = Animator.StringToHash("FreeLookMovementSpeed");
         private static readonly int FreeLookLocomotionHash = Animator.StringToHash("FreeLookLocomotion");
+        private const float AnimationCrossFadeDuration = 0.1f;
         private const float AnimatorDampTime = 0.05f;
         
         public FreeLookState(PlayerStateMachine stateMachine) : base(stateMachine) {}
 
         public override void Enter()
         {
-            StateMachine.Animator.Play(FreeLookLocomotionHash);
+            StateMachine.Animator.CrossFadeInFixedTime(FreeLookLocomotionHash, AnimationCrossFadeDuration);
             StateMachine.InputReader.TargetEvent += OnTarget;
             StateMachine.InputReader.AttackEvent += OnAttack;
         }

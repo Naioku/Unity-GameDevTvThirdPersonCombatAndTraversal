@@ -132,18 +132,22 @@ MonoBehaviour:
     <NextComboAttackTime>k__BackingField: 0.5
     <ForceValue>k__BackingField: 15
     <ForceTime>k__BackingField: 0.1
+    <Damage>k__BackingField: 15
   - <AnimationName>k__BackingField: Attack2
     <TransitionDuration>k__BackingField: 0.1
     <NextAttackIndex>k__BackingField: 2
     <NextComboAttackTime>k__BackingField: 0.5
     <ForceValue>k__BackingField: 15
     <ForceTime>k__BackingField: 0.35
+    <Damage>k__BackingField: 15
   - <AnimationName>k__BackingField: Attack3
     <TransitionDuration>k__BackingField: 0.2
     <NextAttackIndex>k__BackingField: -1
     <NextComboAttackTime>k__BackingField: 0
     <ForceValue>k__BackingField: 20
     <ForceTime>k__BackingField: 0.35
+    <Damage>k__BackingField: 20
+  <WeaponDamage>k__BackingField: {fileID: 7684887079640195464}
 --- !u!114 &4122256252888375124
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -336,6 +340,17 @@ GameObject:
   m_CorrespondingSourceObject: {fileID: 4098868203593970366, guid: 6f23678468c4f2c45bd3fd9173de1292, type: 3}
   m_PrefabInstance: {fileID: 1376765655877958264}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &7684887079640195464 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 8772296313411820528, guid: 6f23678468c4f2c45bd3fd9173de1292, type: 3}
+  m_PrefabInstance: {fileID: 1376765655877958264}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3168664949812398278}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2b6481a62fe258340a050680ec4cf935, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &8556948568098171500
 PrefabInstance:
   m_ObjectHideFlags: 0
