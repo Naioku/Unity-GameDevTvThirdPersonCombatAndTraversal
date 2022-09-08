@@ -24,14 +24,10 @@ namespace StateMachines.Player
 
         protected void FaceTarget()
         {
-
             Target target = StateMachine.Targeter.CurrentTarget;
             if (target == null) return;
 
-            Vector3 pointingVector = target.transform.position - StateMachine.transform.position;
-            pointingVector.y = 0f;
-
-            StateMachine.transform.rotation = Quaternion.LookRotation(pointingVector);
+            FaceTowards(StateMachine.gameObject, target.gameObject);
         }
     }
 }

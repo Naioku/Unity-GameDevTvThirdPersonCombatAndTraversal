@@ -36,5 +36,10 @@ namespace StateMachines.Enemy
 
             return distanceFromPlayerSquared <= Mathf.Pow(StateMachine.PlayerChasingRange, 2);
         }
+
+        protected void FacePlayer()
+        {
+            FaceTowards(StateMachine.gameObject, StateMachine.Player);
+        }
     }
 }
