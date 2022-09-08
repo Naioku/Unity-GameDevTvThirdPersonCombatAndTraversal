@@ -2,7 +2,7 @@ using UnityEngine;
 
 namespace StateMachines.Player
 {
-    public class TargetingState : PlayerBaseState
+    public class PlayerTargetingState : PlayerBaseState
     {
         private static readonly int TargetingLocomotion = Animator.StringToHash("TargetingLocomotion");
         private static readonly int TargetingMovementForwardSpeedHash = Animator.StringToHash("TargetingMovementForwardSpeed");
@@ -10,7 +10,7 @@ namespace StateMachines.Player
         private const float AnimationCrossFadeDuration = 0.1f;
         private const float AnimatorDampTime = 0.05f;
 
-        public TargetingState(PlayerStateMachine stateMachine) : base(stateMachine) {}
+        public PlayerTargetingState(PlayerStateMachine stateMachine) : base(stateMachine) {}
         
         public override void Enter()
         {
@@ -24,7 +24,7 @@ namespace StateMachines.Player
         {
             if (StateMachine.Targeter.CurrentTarget == null)
             {
-                StateMachine.SwitchState(new FreeLookState(StateMachine));
+                StateMachine.SwitchState(new PlayerFreeLookState(StateMachine));
             }
 
             Move(CalculateMovement() * StateMachine.TargetingMovementSpeed, deltaTime);
@@ -41,7 +41,7 @@ namespace StateMachines.Player
         private void OnCancel()
         {
             StateMachine.Targeter.Cancel();
-            StateMachine.SwitchState(new FreeLookState(StateMachine));
+            StateMachine.SwitchState(new PlayerFreeLookState(StateMachine));
         }
 
         private Vector3 CalculateMovement()
@@ -82,7 +82,7 @@ namespace StateMachines.Player
         
         private void OnAttack()
         {
-            StateMachine.SwitchState(new AttackingState(StateMachine, 0));
+            StateMachine.SwitchState(new PlayerAttackingState(StateMachine, 0));
         }
     }
 }

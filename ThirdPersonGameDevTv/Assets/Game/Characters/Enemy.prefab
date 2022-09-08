@@ -9,6 +9,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4002552889961664173}
+  - component: {fileID: 5120768135099292409}
   - component: {fileID: -5801203462343459802}
   - component: {fileID: 7545403613440139719}
   - component: {fileID: 449196762123227359}
@@ -34,8 +35,28 @@ Transform:
   m_Children:
   - {fileID: 6470421458009164227}
   m_Father: {fileID: 0}
-  m_RootOrder: 3
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: -147.354, z: 0}
+--- !u!95 &5120768135099292409
+Animator:
+  serializedVersion: 4
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4002552889961664174}
+  m_Enabled: 1
+  m_Avatar: {fileID: 9000000, guid: b4d115b8fcaea27449d6322806c8f2c7, type: 3}
+  m_Controller: {fileID: 9100000, guid: 43e63982e4707c94ba6f7b950e7943fb, type: 2}
+  m_CullingMode: 1
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorControllerStateOnDisable: 0
 --- !u!143 &-5801203462343459802
 CharacterController:
   m_ObjectHideFlags: 0
@@ -147,7 +168,8 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 4080347546517356660, guid: ff4931308f782ef42b5be1eb76a3efd7, type: 3}
     m_AddedGameObjects: []
   m_SourcePrefab: {fileID: 100100000, guid: ff4931308f782ef42b5be1eb76a3efd7, type: 3}
 --- !u!4 &6470421458009164227 stripped

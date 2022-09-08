@@ -3,7 +3,7 @@ using UnityEngine;
 
 namespace StateMachines.Player
 {
-    public class AttackingState : PlayerBaseState
+    public class PlayerAttackingState : PlayerBaseState
     {
         private float _previousFrameTime;
         private bool _isComboBroken;
@@ -11,7 +11,7 @@ namespace StateMachines.Player
         private readonly Attack _attack;
         private bool _hasForceAlreadyApplied;
 
-        public AttackingState(PlayerStateMachine stateMachine, int attackIndex) : base(stateMachine)
+        public PlayerAttackingState(PlayerStateMachine stateMachine, int attackIndex) : base(stateMachine)
         {
             _attack = StateMachine.Attacks[attackIndex];
         }
@@ -32,11 +32,11 @@ namespace StateMachines.Player
             {
                 if (StateMachine.Targeter.CurrentTarget == null)
                 {
-                    StateMachine.SwitchState(new FreeLookState(StateMachine));
+                    StateMachine.SwitchState(new PlayerFreeLookState(StateMachine));
                 }
                 else
                 {
-                    StateMachine.SwitchState(new TargetingState(StateMachine));
+                    StateMachine.SwitchState(new PlayerTargetingState(StateMachine));
                 }
             }
             
@@ -68,7 +68,7 @@ namespace StateMachines.Player
 
             StateMachine.SwitchState
             (
-                new AttackingState
+                new PlayerAttackingState
                 (
                     StateMachine,
                     _attack.NextAttackIndex
