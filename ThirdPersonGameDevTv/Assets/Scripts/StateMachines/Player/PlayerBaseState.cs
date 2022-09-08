@@ -27,8 +27,6 @@ namespace StateMachines.Player
             pointingVector.y = 0f;
 
             StateMachine.transform.rotation = Quaternion.LookRotation(pointingVector);
-            
-            // StateMachine.transform.LookAt(target.transform.position);
         }
     }
 }
