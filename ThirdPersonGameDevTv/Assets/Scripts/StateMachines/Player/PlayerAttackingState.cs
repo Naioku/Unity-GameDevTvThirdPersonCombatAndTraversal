@@ -50,11 +50,6 @@ namespace StateMachines.Player
         {
             StateMachine.InputReader.AttackEvent -= TryComboAttack;
         }
-        
-        private void Move(float deltaTime)
-        {
-            Move(Vector3.zero, deltaTime);
-        }
 
         private void TryComboAttack()
         {

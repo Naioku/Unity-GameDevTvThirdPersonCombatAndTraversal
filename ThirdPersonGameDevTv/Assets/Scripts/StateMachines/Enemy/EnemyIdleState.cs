@@ -18,7 +18,10 @@ namespace StateMachines.Enemy
         
         public override void Tick(float deltaTime)
         {
+            Move(deltaTime);
             StateMachine.Animator.SetFloat(Speed, 0f, AnimatorDampTime, deltaTime);
+            
+            if (IsInChaseRange()) Debug.Log("Chasing player.");
         }
 
         public override void Exit()
