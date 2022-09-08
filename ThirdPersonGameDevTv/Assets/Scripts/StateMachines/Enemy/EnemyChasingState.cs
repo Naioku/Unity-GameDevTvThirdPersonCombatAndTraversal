@@ -42,9 +42,12 @@ namespace StateMachines.Enemy
 
         private void MoveToPlayer(float deltaTime)
         {
-            StateMachine.NavMeshAgent.destination = StateMachine.Player.transform.position;
+            if (StateMachine.NavMeshAgent.isOnNavMesh)
+            {
+                StateMachine.NavMeshAgent.destination = StateMachine.Player.transform.position;
             
-            Move(StateMachine.NavMeshAgent.desiredVelocity.normalized * StateMachine.MovementSpeed, deltaTime);
+                Move(StateMachine.NavMeshAgent.desiredVelocity.normalized * StateMachine.MovementSpeed, deltaTime);
+            }
 
             StateMachine.NavMeshAgent.velocity = StateMachine.CharacterController.velocity;
         }

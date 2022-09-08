@@ -11,7 +11,7 @@ namespace StateMachines.Enemy
         
         public override void Enter()
         {
-            StateMachine.WeaponDamage.SetWeaponDamage(StateMachine.AttackDamage);
+            StateMachine.WeaponDamage.SetWeaponDamage(StateMachine.AttackDamage, StateMachine.AttackKnockBack);
             StateMachine.Animator.CrossFadeInFixedTime(AttackHash, AnimationCrossFadeDuration);
         }
 

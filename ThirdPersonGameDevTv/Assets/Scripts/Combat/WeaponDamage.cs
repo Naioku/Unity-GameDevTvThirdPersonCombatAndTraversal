@@ -8,6 +8,7 @@ namespace Combat
         [SerializeField] private Collider ownerCollider;
         
         private int _weaponDamage;
+        private float _knockBack;
         private readonly List<Collider> _alreadyCollidedWith = new();
 
         private void OnEnable()
@@ -26,11 +27,25 @@ namespace Combat
             {
                 health.TakeDamage(_weaponDamage);
             }
+
+            if (other.TryGetComponent(out ForceReceiver forceReceiver))
+            {
+                forceReceiver.AddForce
+                (
+                    GetDirection(ownerCollider.transform.position, other.transform.position) * _knockBack
+                );
+            }
         }
 
-        public void SetWeaponDamage(int damage)
+        private Vector3 GetDirection(Vector3 from, Vector3 to)
+        {
+            return (to - from).normalized;
+        }
+
+        public void SetWeaponDamage(int damage, float knockBack)
         {
             _weaponDamage = damage;
+            _knockBack = knockBack;
         }
     }
 }
