@@ -4,35 +4,40 @@ namespace StateMachines.Player
 {
     public class FreeLookState : PlayerBaseState
     {
-        private static readonly int MovementSpeed = Animator.StringToHash("MovementSpeed");
+        private static readonly int MovementSpeedHash = Animator.StringToHash("FreeLookMovementSpeed");
+        private static readonly int FreeLookLocomotionHash = Animator.StringToHash("FreeLookLocomotion");
+        private const float AnimationCrossFadeDuration = 0.1f;
         private const float AnimatorDampTime = 0.05f;
         
         public FreeLookState(PlayerStateMachine stateMachine) : base(stateMachine) {}
 
         public override void Enter()
         {
-            Debug.Log("Enter");
+            StateMachine.Animator.CrossFadeInFixedTime(FreeLookLocomotionHash, AnimationCrossFadeDuration);
+            StateMachine.InputReader.TargetEvent += OnTarget;
+            StateMachine.InputReader.AttackEvent += OnAttack;
         }
 
         public override void Tick(float deltaTime)
         {
             var movementVector = CalculateMovementVectorFromCameraPosition();
 
-            StateMachine.CharacterController.Move(movementVector * StateMachine.MovementSpeed * deltaTime);
+            Move(movementVector * StateMachine.FreeLookMovementSpeed, deltaTime);
 
             if (StateMachine.InputReader.MovementValue == Vector2.zero)
             {
-                StateMachine.Animator.SetFloat(MovementSpeed, 0f, AnimatorDampTime, deltaTime);
+                StateMachine.Animator.SetFloat(MovementSpeedHash, 0f, AnimatorDampTime, deltaTime);
                 return;
             }
             
             FaceMovementDirection(movementVector);
-            StateMachine.Animator.SetFloat(MovementSpeed, 1f, AnimatorDampTime, deltaTime);
+            StateMachine.Animator.SetFloat(MovementSpeedHash, 1f, AnimatorDampTime, deltaTime);
         }
 
         public override void Exit()
         {
-            Debug.Log("Exit");
+            StateMachine.InputReader.TargetEvent -= OnTarget;
+            StateMachine.InputReader.AttackEvent -= OnAttack;
         }
         
         private Vector3 CalculateMovementVectorFromCameraPosition()
@@ -59,6 +64,18 @@ namespace StateMachines.Player
                 StateMachine.transform.rotation,
                 Quaternion.LookRotation(movementVector),
                 Time.deltaTime * StateMachine.RotationDamping);
+        }
+        
+        private void OnTarget()
+        {
+            if (!StateMachine.Targeter.SelectTarget()) return;
+            
+            StateMachine.SwitchState(new TargetingState(StateMachine));
+        }
+        
+        private void OnAttack()
+        {
+            StateMachine.SwitchState(new AttackingState(StateMachine, 0));
         }
     }
 }
