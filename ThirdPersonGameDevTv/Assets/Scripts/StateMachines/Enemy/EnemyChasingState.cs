@@ -27,6 +27,11 @@ namespace StateMachines.Enemy
             {
                 StateMachine.SwitchState(new EnemyIdleState(StateMachine));
             }
+
+            if (IsInAttackingRange())
+            {
+                StateMachine.SwitchState(new EnemyAttackState(StateMachine));
+            }
         }
 
         public override void Exit()
@@ -42,6 +47,11 @@ namespace StateMachines.Enemy
             Move(StateMachine.NavMeshAgent.desiredVelocity.normalized * StateMachine.MovementSpeed, deltaTime);
 
             StateMachine.NavMeshAgent.velocity = StateMachine.CharacterController.velocity;
+        }
+
+        private bool IsInAttackingRange()
+        {
+            return IsInRangeOf(StateMachine.AttackRange, StateMachine.Player);
         }
     }
 }

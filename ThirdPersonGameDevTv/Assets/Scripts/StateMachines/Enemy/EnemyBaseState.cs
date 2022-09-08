@@ -32,9 +32,16 @@ namespace StateMachines.Enemy
             // return distanceFromPlayer <= StateMachine.PlayerChasingRange;
 
             // That can be better for performance, because computer doesn't have to root the squared magnitude.
-            float distanceFromPlayerSquared = (StateMachine.transform.position - StateMachine.Player.transform.position).sqrMagnitude;
 
-            return distanceFromPlayerSquared <= Mathf.Pow(StateMachine.PlayerChasingRange, 2);
+            return IsInRangeOf(StateMachine.PlayerChasingRange, StateMachine.Player);
+        }
+        
+        protected bool IsInRangeOf(float range, GameObject target)
+        {
+            float distanceFromPlayerSquared =
+                (StateMachine.transform.position - target.transform.position).sqrMagnitude;
+
+            return distanceFromPlayerSquared <= Mathf.Pow(range, 2);
         }
 
         protected void FacePlayer()

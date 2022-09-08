@@ -31,7 +31,7 @@ Transform:
   - {fileID: 8013830975793512017}
   - {fileID: 1441642085342415776}
   m_Father: {fileID: 0}
-  m_RootOrder: -1
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &4098868203593970366
 GameObject:
@@ -75,7 +75,7 @@ CapsuleCollider:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 4098868203593970366}
   m_Material: {fileID: 0}
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_Enabled: 1
   m_Radius: 0.5
   m_Height: 1
@@ -110,7 +110,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   ownerCollider: {fileID: 0}
-  weaponDamage: 10
 --- !u!1001 &8113554208585601404
 PrefabInstance:
   m_ObjectHideFlags: 0

@@ -75,7 +75,7 @@ namespace StateMachines.Player
         
         private void OnAttack()
         {
-            StateMachine.SwitchState(new PlayerAttackingState(StateMachine, 0));
+            StateMachine.SwitchState(new PlayerAttackState(StateMachine, 0));
         }
     }
 }

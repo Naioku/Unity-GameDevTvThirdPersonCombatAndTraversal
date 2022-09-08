@@ -3,7 +3,7 @@ using UnityEngine;
 
 namespace StateMachines.Player
 {
-    public class PlayerAttackingState : PlayerBaseState
+    public class PlayerAttackState : PlayerBaseState
     {
         private float _previousFrameTime;
         private bool _isComboBroken;
@@ -11,7 +11,7 @@ namespace StateMachines.Player
         private readonly Attack _attack;
         private bool _hasForceAlreadyApplied;
 
-        public PlayerAttackingState(PlayerStateMachine stateMachine, int attackIndex) : base(stateMachine)
+        public PlayerAttackState(PlayerStateMachine stateMachine, int attackIndex) : base(stateMachine)
         {
             _attack = StateMachine.Attacks[attackIndex];
         }
@@ -28,7 +28,7 @@ namespace StateMachines.Player
             Move(deltaTime);
             FaceTarget();
 
-            if (GetNormalizedAnimationTime() >= 1f)
+            if (GetNormalizedAnimationTime(StateMachine.Animator) >= 1f)
             {
                 if (StateMachine.Targeter.CurrentTarget == null)
                 {
@@ -40,7 +40,7 @@ namespace StateMachines.Player
                 }
             }
             
-            if (GetNormalizedAnimationTime() >= _attack.ForceTime)
+            if (GetNormalizedAnimationTime(StateMachine.Animator) >= _attack.ForceTime)
             {
                 TryForceApplication();
             }
@@ -54,7 +54,7 @@ namespace StateMachines.Player
         private void TryComboAttack()
         {
             if (!HasCombo()) return;
-            if (!ReadyForNextAttack(GetNormalizedAnimationTime()))
+            if (!ReadyForNextAttack(GetNormalizedAnimationTime(StateMachine.Animator)))
             {
                 _isComboBroken = true;
                 return;
@@ -63,37 +63,12 @@ namespace StateMachines.Player
 
             StateMachine.SwitchState
             (
-                new PlayerAttackingState
+                new PlayerAttackState
                 (
                     StateMachine,
                     _attack.NextAttackIndex
                 )
             );
-        }
-
-        /// <summary>
-        /// Normalized time - The integer part is the number of time a state has been looped.
-        /// The fractional part is the % (0-1) of progress in the current loop.
-        ///
-        /// It gets the normalized time of currently played animation tagged with "Attack".
-        /// </summary>
-        /// <returns></returns>
-        private float GetNormalizedAnimationTime()
-        {
-            AnimatorStateInfo currentInfo = StateMachine.Animator.GetCurrentAnimatorStateInfo(0);
-            AnimatorStateInfo nextInfo = StateMachine.Animator.GetNextAnimatorStateInfo(0);
-
-            if (StateMachine.Animator.IsInTransition(0) && nextInfo.IsTag("Attack"))
-            {
-                return nextInfo.normalizedTime;
-            }
-
-            if (!StateMachine.Animator.IsInTransition(0) && currentInfo.IsTag("Attack"))
-            {
-                return currentInfo.normalizedTime;
-            }
-
-            return 0f;
         }
 
         private bool ReadyForNextAttack(float normalizedTime)
