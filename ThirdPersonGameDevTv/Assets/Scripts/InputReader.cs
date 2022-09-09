@@ -11,6 +11,7 @@ public class InputReader : MonoBehaviour, Controls.IPlayerActions
     public event Action AttackEvent;
     
     public Vector2 MovementValue { get; private set; }
+    public bool IsBlocking { get; private set; }
 
     private Controls _controls;
     
@@ -61,10 +62,22 @@ public class InputReader : MonoBehaviour, Controls.IPlayerActions
         
         AttackEvent?.Invoke();
     }
-    
+
     public void OnMove(InputAction.CallbackContext context)
     {
         MovementValue = context.ReadValue<Vector2>();
+    }
+
+    public void OnBlock(InputAction.CallbackContext context)
+    {
+        if (context.performed)
+        {
+            IsBlocking = true;
+        }
+        else if (context.canceled)
+        {
+            IsBlocking = false;
+        }
     }
 
     public void OnCameraLook(InputAction.CallbackContext context) {}

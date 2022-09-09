@@ -29,5 +29,17 @@ namespace StateMachines.Player
 
             FaceTowards(StateMachine.gameObject, target.gameObject);
         }
+        
+        protected void ReturnToLocomotion()
+        {
+            if (StateMachine.Targeter.CurrentTarget == null)
+            {
+                StateMachine.SwitchState(new PlayerFreeLookState(StateMachine));
+            }
+            else
+            {
+                StateMachine.SwitchState(new PlayerTargetingState(StateMachine));
+            }
+        }
     }
 }

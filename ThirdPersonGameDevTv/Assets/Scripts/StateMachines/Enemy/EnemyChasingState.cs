@@ -23,12 +23,12 @@ namespace StateMachines.Enemy
             
             StateMachine.Animator.SetFloat(Speed, 1f, AnimatorDampTime, deltaTime);
 
-            if (!IsInChaseRange())
+            if (!ShouldChase())
             {
                 StateMachine.SwitchState(new EnemyIdleState(StateMachine));
             }
 
-            if (IsInAttackingRange())
+            if (ShouldAttack())
             {
                 StateMachine.SwitchState(new EnemyAttackState(StateMachine));
             }
@@ -42,16 +42,19 @@ namespace StateMachines.Enemy
 
         private void MoveToPlayer(float deltaTime)
         {
-            StateMachine.NavMeshAgent.destination = StateMachine.Player.transform.position;
+            if (StateMachine.NavMeshAgent.isOnNavMesh)
+            {
+                StateMachine.NavMeshAgent.destination = StateMachine.Player.transform.position;
             
-            Move(StateMachine.NavMeshAgent.desiredVelocity.normalized * StateMachine.MovementSpeed, deltaTime);
+                Move(StateMachine.NavMeshAgent.desiredVelocity.normalized * StateMachine.MovementSpeed, deltaTime);
+            }
 
             StateMachine.NavMeshAgent.velocity = StateMachine.CharacterController.velocity;
         }
 
-        private bool IsInAttackingRange()
+        private bool ShouldAttack()
         {
-            return IsInRangeOf(StateMachine.AttackRange, StateMachine.Player);
+            return !StateMachine.Player.IsDead && IsInRangeOf(StateMachine.AttackRange, StateMachine.Player.gameObject);
         }
     }
 }

@@ -15,9 +15,8 @@ namespace StateMachines.Player
         public override void Enter()
         {
             StateMachine.Animator.CrossFadeInFixedTime(TargetingLocomotion, AnimationCrossFadeDuration);
-            StateMachine.InputReader.CancelEvent += OnCancel;
+            StateMachine.InputReader.CancelEvent += OnCancelState;
             StateMachine.InputReader.AttackEvent += OnAttack;
-
         }
 
         public override void Tick(float deltaTime)
@@ -27,6 +26,11 @@ namespace StateMachines.Player
                 StateMachine.SwitchState(new PlayerFreeLookState(StateMachine));
             }
 
+            if (StateMachine.InputReader.IsBlocking)
+            {
+                StateMachine.SwitchState(new PlayerBlockState(StateMachine));
+            }
+
             Move(CalculateMovement() * StateMachine.TargetingMovementSpeed, deltaTime);
             UpdateAnimator(deltaTime);
             FaceTarget();
@@ -34,11 +38,11 @@ namespace StateMachines.Player
 
         public override void Exit()
         {
-            StateMachine.InputReader.CancelEvent -= OnCancel;
+            StateMachine.InputReader.CancelEvent -= OnCancelState;
             StateMachine.InputReader.AttackEvent -= OnAttack;
         }
 
-        private void OnCancel()
+        private void OnCancelState()
         {
             StateMachine.Targeter.Cancel();
             StateMachine.SwitchState(new PlayerFreeLookState(StateMachine));

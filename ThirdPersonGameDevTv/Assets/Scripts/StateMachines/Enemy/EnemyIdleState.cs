@@ -21,7 +21,7 @@ namespace StateMachines.Enemy
             Move(deltaTime);
             StateMachine.Animator.SetFloat(Speed, 0f, AnimatorDampTime, deltaTime);
 
-            if (IsInChaseRange())
+            if (ShouldChase())
             {
                 StateMachine.SwitchState(new EnemyChasingState(StateMachine));
             }

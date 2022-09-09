@@ -29,12 +29,12 @@ namespace Combat.Targeting
             
             foreach (var target in _targetList)
             {
-                Vector2 targetScreenPosition = _mainCamera.WorldToViewportPoint(target.transform.position);
-                if (!IsTargetOnTheScreen(targetScreenPosition))
+                if (!IsTargetOnTheScreen(target))
                 {
                     continue;
                 }
-
+                
+                Vector2 targetScreenPosition = _mainCamera.WorldToViewportPoint(target.transform.position);
                 float checkedDistance = Vector2.Distance(screenCenter, targetScreenPosition);
                 if (checkedDistance < closestTargetDistanceToCenter)
                 {
@@ -52,11 +52,9 @@ namespace Combat.Targeting
             return true;
         }
 
-        private bool IsTargetOnTheScreen(Vector2 targetScreenPosition)
+        private bool IsTargetOnTheScreen(Target target)
         {
-            return targetScreenPosition.x is > 0f and < 1f &&
-                   targetScreenPosition.y is > 0f and < 1f;
-
+            return target.GetComponentInChildren<Renderer>().isVisible;
         }
 
         public void Cancel()

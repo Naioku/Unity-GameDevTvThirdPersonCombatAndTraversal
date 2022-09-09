@@ -20,7 +20,7 @@ namespace StateMachines.Player
         {
             StateMachine.Animator.CrossFadeInFixedTime(_attack.AnimationName, _attack.TransitionDuration);
             StateMachine.InputReader.AttackEvent += TryComboAttack;
-            StateMachine.WeaponDamage.SetWeaponDamage(_attack.Damage);
+            StateMachine.WeaponDamage.SetWeaponDamage(_attack.Damage, _attack.KnockBack);
         }
 
         public override void Tick(float deltaTime)
@@ -30,14 +30,7 @@ namespace StateMachines.Player
 
             if (GetNormalizedAnimationTime(StateMachine.Animator) >= 1f)
             {
-                if (StateMachine.Targeter.CurrentTarget == null)
-                {
-                    StateMachine.SwitchState(new PlayerFreeLookState(StateMachine));
-                }
-                else
-                {
-                    StateMachine.SwitchState(new PlayerTargetingState(StateMachine));
-                }
+               ReturnToLocomotion();
             }
             
             if (GetNormalizedAnimationTime(StateMachine.Animator) >= _attack.ForceTime)
