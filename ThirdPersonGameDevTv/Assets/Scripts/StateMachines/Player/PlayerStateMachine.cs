@@ -20,8 +20,7 @@ namespace StateMachines.Player
         public Transform MainCameraTransform { get; private set; }
         public ForceReceiver ForceReceiver { get; private set; }
         public Ragdoll Ragdoll { get; private set; }
-
-        private Health Health { get; set; }
+        public Health Health { get; set; }
 
         private void Awake()
         {
