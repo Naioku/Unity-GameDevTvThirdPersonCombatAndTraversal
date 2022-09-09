@@ -1,3 +1,4 @@
+using Combat;
 using UnityEngine;
 
 namespace StateMachines.Enemy
@@ -13,11 +14,12 @@ namespace StateMachines.Enemy
         {
             StateMachine.WeaponDamage.SetWeaponDamage(StateMachine.AttackDamage, StateMachine.AttackKnockBack);
             StateMachine.Animator.CrossFadeInFixedTime(AttackHash, AnimationCrossFadeDuration);
+            
+            FacePlayer();
         }
 
         public override void Tick(float deltaTime)
         {
-            FacePlayer();
             Move(deltaTime);
             
             if (GetNormalizedAnimationTime(StateMachine.Animator) >= 1f)

@@ -9,6 +9,7 @@ namespace Combat
         public event Action OnDie;
         
         public bool IsInvulnerable { get; set; }
+        public bool IsDead => _currentHealth == 0;
         
         [SerializeField] private int maxHealth = 100;
 
@@ -21,14 +22,14 @@ namespace Combat
 
         public void TakeDamage(int damage)
         {
-            if (_currentHealth == 0) return;
+            if (IsDead) return;
             if (IsInvulnerable) return;
             
             _currentHealth = Mathf.Max(_currentHealth - damage, 0);
             OnTakeDamage?.Invoke();
             print("Character health: " + _currentHealth);
             
-            if (_currentHealth == 0)
+            if (IsDead)
             {
                 print("Character is dead xP");
                 OnDie?.Invoke();

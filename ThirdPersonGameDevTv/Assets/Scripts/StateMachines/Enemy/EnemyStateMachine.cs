@@ -16,7 +16,7 @@ namespace StateMachines.Enemy
         [field: SerializeField] public float ImpactDuration { get; private set; } = 0.5f; // To expose it that way to inspector "set" must not be deleted.
 
         public Animator Animator { get; private set; }
-        public GameObject Player { get; private set; }
+        public Health Player { get; private set; }
         public CharacterController CharacterController { get; private set; }
         public ForceReceiver ForceReceiver { get; private set; }
         public NavMeshAgent NavMeshAgent { get; private set; }
@@ -38,7 +38,7 @@ namespace StateMachines.Enemy
 
         private void Start()
         {
-            Player = GameObject.FindGameObjectWithTag("Player");
+            Player = GameObject.FindGameObjectWithTag("Player").GetComponent<Health>();
 
             NavMeshAgent.updatePosition = false;
             NavMeshAgent.updateRotation = false;

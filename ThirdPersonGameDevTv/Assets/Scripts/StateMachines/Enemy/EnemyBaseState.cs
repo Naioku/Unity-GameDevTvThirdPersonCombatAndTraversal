@@ -21,7 +21,7 @@ namespace StateMachines.Enemy
             StateMachine.CharacterController.Move((motion + StateMachine.ForceReceiver.ForceDisplacement) * deltaTime);
         }
 
-        protected bool IsInChaseRange()
+        protected bool ShouldChase()
         {
             // float distanceFromPlayer = Vector3.Distance
             // (
@@ -32,8 +32,7 @@ namespace StateMachines.Enemy
             // return distanceFromPlayer <= StateMachine.PlayerChasingRange;
 
             // That can be better for performance, because computer doesn't have to root the squared magnitude.
-
-            return IsInRangeOf(StateMachine.PlayerChasingRange, StateMachine.Player);
+            return !StateMachine.Player.IsDead && IsInRangeOf(StateMachine.PlayerChasingRange, StateMachine.Player.gameObject);
         }
         
         protected bool IsInRangeOf(float range, GameObject target)
@@ -46,7 +45,7 @@ namespace StateMachines.Enemy
 
         protected void FacePlayer()
         {
-            FaceTowards(StateMachine.gameObject, StateMachine.Player);
+            FaceTowards(StateMachine.gameObject, StateMachine.Player.gameObject);
         }
     }
 }

@@ -69,8 +69,8 @@ MonoBehaviour:
     GateFit: 2
     m_SensorSize: {x: 1, y: 1}
   m_Transitions:
-    m_BlendHint: 0
-    m_InheritPosition: 0
+    m_BlendHint: 2
+    m_InheritPosition: 1
     m_OnCameraLive:
       m_PersistentCalls:
         m_Calls: []
@@ -419,7 +419,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 953753804258913638}
-  m_LocalRotation: {x: -0.105505735, y: 0.000000004276589, z: 4.537371e-10, w: 0.9944187}
+  m_LocalRotation: {x: -0.10550574, y: 0.0000000074089974, z: 7.860791e-10, w: 0.9944187}
   m_LocalPosition: {x: 0, y: 4.2650003, z: -6}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -602,7 +602,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 953753804374554388}
-  m_LocalRotation: {x: -0.08740032, y: 0.000000004284892, z: 3.7593956e-10, w: 0.99617326}
+  m_LocalRotation: {x: -0.08740032, y: 0.0000000042851345, z: 3.7596082e-10, w: 0.99617326}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -1152,7 +1152,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 6539178486513819844}
-  m_LocalRotation: {x: 0.1784248, y: -0.000000008465141, z: 0.0000000015350229, w: 0.98395354}
+  m_LocalRotation: {x: 0.17842482, y: -0.0000000084649825, z: 0.0000000015349945, w: 0.98395354}
   m_LocalPosition: {x: 22.41814, y: 20.711273, z: -1.0308533}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -1225,7 +1225,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 7370148709594265728}
   m_LocalRotation: {x: 0.15596108, y: -0.7822486, z: 0.21675164, w: -0.56283385}
-  m_LocalPosition: {x: -0.000000068825514, y: 0, z: 4.2720017}
+  m_LocalPosition: {x: -0.00000006882806, y: -0.00000011920929, z: 4.2720017}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -1321,8 +1321,8 @@ MonoBehaviour:
     m_ActivateAfter: 0
     m_MinDuration: 0
   m_DefaultBlend:
-    m_Style: 1
-    m_Time: 0.5
+    m_Style: 2
+    m_Time: 0.25
     m_CustomCurve:
       serializedVersion: 2
       m_Curve: []
