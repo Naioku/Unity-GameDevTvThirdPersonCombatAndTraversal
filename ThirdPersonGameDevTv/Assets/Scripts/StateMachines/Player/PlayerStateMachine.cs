@@ -19,7 +19,9 @@ namespace StateMachines.Player
         public Animator Animator { get; private set; }
         public Transform MainCameraTransform { get; private set; }
         public ForceReceiver ForceReceiver { get; private set; }
-        public Health Health { get; private set; }
+        public Ragdoll Ragdoll { get; private set; }
+
+        private Health Health { get; set; }
 
         private void Awake()
         {
@@ -28,6 +30,7 @@ namespace StateMachines.Player
             Animator = GetComponent<Animator>();
             ForceReceiver = GetComponent<ForceReceiver>();
             Health = GetComponent<Health>();
+            Ragdoll = GetComponent<Ragdoll>();
         }
 
         private void Start()

@@ -6,6 +6,7 @@ namespace StateMachines.Player
         
         public override void Enter()
         {
+            StateMachine.Ragdoll.ToggleRagdoll(true);
             StateMachine.WeaponDamage.gameObject.SetActive(false);
         }
 

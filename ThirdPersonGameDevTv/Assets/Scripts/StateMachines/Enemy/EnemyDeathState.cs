@@ -8,6 +8,7 @@ namespace StateMachines.Enemy
         
         public override void Enter()
         {
+            StateMachine.Ragdoll.ToggleRagdoll(true);
             StateMachine.WeaponDamage.gameObject.SetActive(false);
             Object.Destroy(StateMachine.Target);
         }
