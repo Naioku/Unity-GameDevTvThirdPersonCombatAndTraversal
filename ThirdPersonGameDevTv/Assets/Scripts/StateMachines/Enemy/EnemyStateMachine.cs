@@ -1,4 +1,5 @@
 using Combat;
+using Combat.Targeting;
 using UnityEngine;
 using UnityEngine.AI;
 
@@ -21,6 +22,7 @@ namespace StateMachines.Enemy
         public ForceReceiver ForceReceiver { get; private set; }
         public NavMeshAgent NavMeshAgent { get; private set; }
         public Health Health { get; private set; }
+        public Target Target { get; private set; }
 
         private void Awake()
         {
@@ -29,6 +31,7 @@ namespace StateMachines.Enemy
             ForceReceiver = GetComponent<ForceReceiver>();
             NavMeshAgent = GetComponent<NavMeshAgent>();
             Health = GetComponent<Health>();
+            Target = GetComponent<Target>();
         }
 
         private void Start()
@@ -50,16 +53,24 @@ namespace StateMachines.Enemy
         private void OnEnable()
         {
             Health.OnTakeDamage += HandleTakeDamage;
+            Health.OnDie += HandleDeath;
         }
 
         private void OnDisable()
         {
             Health.OnTakeDamage -= HandleTakeDamage;
+            Health.OnDie -= HandleDeath;
+
         }
 
         private void HandleTakeDamage()
         {
             SwitchState(new EnemyImpactState(this));
+        }
+
+        private void HandleDeath()
+        {
+            SwitchState(new EnemyDeathState(this));
         }
     }
 }
